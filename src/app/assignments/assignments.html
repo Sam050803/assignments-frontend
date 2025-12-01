@@ -1,0 +1,111 @@
+<div class="assignments-page">
+  <!-- Header fixe -->
+  <header class="page-header">
+    <div class="header-content">
+      <div class="header-info">
+        <h1>Mes devoirs</h1>
+        <p class="subtitle">
+          <span class="count-badge">{{totalDocs}}</span> assignment(s) au total
+        </p>
+      </div>
+      <a routerLink="/add" class="btn-add">
+        <mat-icon>add</mat-icon>
+        <span>Nouveau devoir</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Contenu principal -->
+  <main class="main-wrapper">
+    @if(assignments && assignments.length > 0) {
+      <div class="table-card">
+        <!-- Tableau scrollable -->
+        <div class="table-scroll">
+          <table mat-table [dataSource]="dataSource" class="assignments-table">
+            
+            <!-- Colonne Numéro -->
+            <ng-container matColumnDef="numero">
+              <th mat-header-cell *matHeaderCellDef class="col-numero">#</th>
+              <td mat-cell *matCellDef="let assignment; let i = index" class="col-numero">
+                <span class="row-number">{{(pageIndex * pageSize) + i + 1}}</span>
+              </td>
+            </ng-container>
+
+            <!-- Colonne Nom -->
+            <ng-container matColumnDef="nom">
+              <th mat-header-cell *matHeaderCellDef class="col-nom">Nom du devoir</th>
+              <td mat-cell *matCellDef="let assignment" class="col-nom">
+                <a [routerLink]="['/assignment', assignment.id]" class="assignment-link">
+                  <div class="assignment-icon" [class.done]="assignment.rendu">
+                    <mat-icon>{{assignment.rendu ? 'task_alt' : 'description'}}</mat-icon>
+                  </div>
+                  <span class="assignment-name">{{assignment.nom | capitalize}}</span>
+                </a>
+              </td>
+            </ng-container>
+
+            <!-- Colonne Date -->
+            <ng-container matColumnDef="dateDeRendu">
+              <th mat-header-cell *matHeaderCellDef class="col-date">Date de rendu</th>
+              <td mat-cell *matCellDef="let assignment" class="col-date">
+                <div class="date-badge">
+                  <mat-icon>calendar_today</mat-icon>
+                  <span>{{assignment.dateDeRendu | frenchDate:'short'}}</span>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Colonne Statut -->
+            <ng-container matColumnDef="rendu">
+              <th mat-header-cell *matHeaderCellDef class="col-status">Statut</th>
+              <td mat-cell *matCellDef="let assignment" class="col-status">
+                @if(assignment.rendu) {
+                  <span class="status-chip done">
+                    <mat-icon>check_circle</mat-icon>
+                    Rendu
+                  </span>
+                } @else {
+                  <span class="status-chip pending">
+                    <mat-icon>hourglass_empty</mat-icon>
+                    En attente
+                  </span>
+                }
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="assignment-row"></tr>
+          </table>
+        </div>
+
+        <!-- Pagination fixe en bas -->
+        <div class="pagination-bar">
+          <div class="pagination-info">
+            Page <strong>{{pageIndex + 1}}</strong> sur <strong>{{Math.ceil(totalDocs / pageSize)}}</strong>
+          </div>
+          <mat-paginator 
+            [length]="totalDocs"
+            [pageSize]="pageSize"
+            [pageIndex]="pageIndex"
+            [pageSizeOptions]="pageSizeOptions"
+            showFirstLastButtons
+            (page)="handlePageEvent($event)"
+            class="custom-paginator">
+          </mat-paginator>
+        </div>
+      </div>
+    } @else {
+      <div class="empty-state">
+        <div class="empty-illustration">
+          <mat-icon>assignment</mat-icon>
+        </div>
+        <h2>Aucun devoir</h2>
+        <p>Commencez par créer votre premier devoir</p>
+        <a routerLink="/add" class="btn-add">
+          <mat-icon>add</mat-icon>
+          <span>Créer un devoir</span>
+        </a>
+      </div>
+    }
+  </main>
+</div>

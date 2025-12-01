@@ -1,0 +1,51 @@
+<div class="page">
+  @if(assignment) {
+    <a routerLink="/home" class="back-link">
+      <mat-icon>arrow_back</mat-icon>
+      Retour aux devoirs
+    </a>
+
+    <div class="form-card">
+      <div class="card-header">
+        <div class="header-icon">
+          <mat-icon>edit</mat-icon>
+        </div>
+        <h1>Modifier le devoir</h1>
+        <p>Éditez les informations de "{{assignment.nom | capitalize}}"</p>
+      </div>
+
+      <form ngForm class="form-body" #formupdate (submit)="onSaveAssignment(); formupdate.reset();">
+        <div class="form-group">
+          <label>Nom du devoir</label>
+          <div class="input-wrapper">
+            <mat-icon>description</mat-icon>
+            <input type="text" placeholder="Ex: Projet Angular" [(ngModel)]="nomAssignment" name="assignment-name">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Date de rendu</label>
+          <mat-form-field appearance="outline" class="date-field">
+            <input matInput [matDatepicker]="picker" [(ngModel)]="dateDeRendu" name="date" placeholder="Sélectionner une date">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="form-actions">
+          <a routerLink="/home" class="btn-secondary">Annuler</a>
+          <button type="submit" class="btn-primary" [disabled]="!nomAssignment || !dateDeRendu">
+            <mat-icon>save</mat-icon>
+            Enregistrer les modifications
+          </button>
+        </div>
+      </form>
+    </div>
+  } @else {
+    <div class="loading-state">
+      <mat-icon>hourglass_empty</mat-icon>
+      <p>Chargement du devoir...</p>
+    </div>
+  }
+</div>
+   

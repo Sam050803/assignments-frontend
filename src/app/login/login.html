@@ -1,0 +1,60 @@
+<div class="login-page">
+  <div class="login-card">
+    <div class="card-header">
+      <div class="header-icon">
+        <mat-icon>lock</mat-icon>
+      </div>
+      <h1>Connexion</h1>
+      <p>Connectez-vous pour accéder à votre compte</p>
+    </div>
+
+    <form ngForm class="form-body" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Identifiant</label>
+        <div class="input-wrapper">
+          <mat-icon>person</mat-icon>
+          <input type="text" placeholder="Votre identifiant" [(ngModel)]="login" name="login" required autocomplete="username">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Mot de passe</label>
+        <div class="input-wrapper">
+          <mat-icon>lock</mat-icon>
+          <input type="password" placeholder="Votre mot de passe" [(ngModel)]="password" name="password" required autocomplete="current-password">
+        </div>
+      </div>
+
+      @if(errorMessage) {
+        <div class="error-box">
+          <mat-icon>error</mat-icon>
+          <span>{{errorMessage}}</span>
+        </div>
+      }
+
+      <button type="submit" class="btn-login" [disabled]="!login || !password">
+        <mat-icon>login</mat-icon>
+        Se connecter
+      </button>
+    </form>
+
+    <div class="card-footer">
+      <div class="footer-divider"></div>
+      <p class="footer-title">Comptes de test</p>
+      <div class="test-accounts">
+        <div class="account-badge admin">
+          <mat-icon>admin_panel_settings</mat-icon>
+          <span><strong>admin</strong> / admin</span>
+        </div>
+        <div class="account-badge user">
+          <mat-icon>person</mat-icon>
+          <span><strong>user</strong> / user</span>
+        </div>
+        <div class="account-badge admin">
+          <mat-icon>admin_panel_settings</mat-icon>
+          <span><strong>michel</strong> / michel123</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

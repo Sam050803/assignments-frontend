@@ -1,0 +1,47 @@
+<div class="app-container">
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <mat-icon>school</mat-icon>
+        <span>Assignments</span>
+      </div>
+    </div>
+    <div class="sidebar-menu">
+      <a routerLink="/home" routerLinkActive="active" class="menu-item">
+        <mat-icon>dashboard</mat-icon>
+        <span>Tableau de bord</span>
+      </a>
+      <a routerLink="/add" routerLinkActive="active" class="menu-item">
+        <mat-icon>add_circle</mat-icon>
+        <span>Nouveau devoir</span>
+      </a>
+      <button (click)="peuplerBD()" class="menu-item menu-button">
+        <mat-icon>database</mat-icon>
+        <span>Peupler BD</span>
+      </button>
+    </div>
+    <div class="sidebar-footer">
+      @if(isLoggedIn) {
+        <div class="user-card">
+          <div class="user-avatar">{{currentUserRole.charAt(0).toUpperCase()}}</div>
+          <div class="user-details">
+            <span class="user-name">{{currentUserRole}}</span>
+            <span class="user-status">Connecté</span>
+          </div>
+          <button mat-icon-button (click)="logout()">
+            <mat-icon>logout</mat-icon>
+          </button>
+        </div>
+      } @else {
+        <a routerLink="/login" class="login-btn">
+          <mat-icon>login</mat-icon>
+          Se connecter
+        </a>
+      }
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

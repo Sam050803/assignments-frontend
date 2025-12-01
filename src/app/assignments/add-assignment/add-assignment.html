@@ -1,0 +1,43 @@
+<div class="page">
+  <a routerLink="/home" class="back-link">
+    <mat-icon>arrow_back</mat-icon>
+    Retour aux devoirs
+  </a>
+
+  <div class="form-card">
+    <div class="card-header">
+      <div class="header-icon">
+        <mat-icon>add_circle</mat-icon>
+      </div>
+      <h1>Nouveau devoir</h1>
+      <p>Ajoutez un nouveau devoir à votre liste</p>
+    </div>
+
+    <form ngform #assignmentForm class="form-body" (submit)="onAjouterAssignment($event); assignmentForm.reset()">
+      <div class="form-group">
+        <label>Nom du devoir</label>
+        <div class="input-wrapper">
+          <mat-icon>description</mat-icon>
+          <input type="text" placeholder="Ex: Projet Angular" name="nom" [(ngModel)]="nomAssignment">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Date de rendu</label>
+        <mat-form-field appearance="outline" class="date-field">
+          <input matInput [matDatepicker]="picker" name="dateDeRendu" [(ngModel)]="dateDeRendu" placeholder="Sélectionner une date">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="form-actions">
+        <a routerLink="/home" class="btn-secondary">Annuler</a>
+        <button type="submit" class="btn-primary" [disabled]="!nomAssignment || !dateDeRendu">
+          <mat-icon>check</mat-icon>
+          Créer le devoir
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

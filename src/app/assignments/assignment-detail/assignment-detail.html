@@ -1,0 +1,72 @@
+<div class="page">
+  @if(assignmentTransmis){
+    <a routerLink="/home" class="back-link">
+      <mat-icon>arrow_back</mat-icon>
+      Retour aux devoirs
+    </a>
+
+    <div class="detail-card">
+      <div class="card-header" [class.rendu]="assignmentTransmis.rendu" [class.pending]="!assignmentTransmis.rendu">
+        <div class="header-content">
+          <div class="title-section">
+            <div class="title-icon" [class.rendu-bg]="assignmentTransmis.rendu" [class.pending-bg]="!assignmentTransmis.rendu">
+              <mat-icon>{{assignmentTransmis.rendu ? 'check_circle' : 'schedule'}}</mat-icon>
+            </div>
+            <div class="title-content">
+              <h1>{{assignmentTransmis.nom | capitalize}}</h1>
+              <div class="status-badge">
+                @if(assignmentTransmis.rendu) {
+                  <span class="status status-done">
+                    <mat-icon>verified</mat-icon>
+                    Rendu
+                  </span>
+                } @else {
+                  <span class="status status-pending">
+                    <mat-icon>pending</mat-icon>
+                    En attente
+                    <!-- En attente -->
+                  </span>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="info-section">
+          <div class="info-card">
+            <div class="info-icon">
+              <mat-icon>event</mat-icon>
+            </div>
+            <div class="info-content">
+              <span class="info-label">Date de rendu</span>
+              <span class="info-value">{{assignmentTransmis.dateDeRendu | frenchDate:'long'}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <div class="footer-actions">
+          @if(!assignmentTransmis.rendu){
+            <button class="btn-success" (click)="onAssignmentRendu()">
+              <mat-icon>check</mat-icon>
+              Marquer comme rendu
+            </button>
+          }
+          <div class="footer-right">
+            <button class="btn-secondary" (click)="onClickEdit()" [disabled]="!isAdmin">
+              <mat-icon>edit</mat-icon>
+              Modifier
+            </button>
+            <button class="btn-danger" (click)="onDelete()" [disabled]="!isAdmin">
+              <mat-icon>delete</mat-icon>
+              Supprimer
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

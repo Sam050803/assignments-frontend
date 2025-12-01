@@ -1,0 +1,665 @@
+/* Variables CSS */
+:host {
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
+  --primary-light: #a5b4fc;
+  --success: #10b981;
+  --success-bg: #d1fae5;
+  --warning: #f59e0b;
+  --warning-bg: #fef3c7;
+  --pending: #3b82f6;
+  --pending-bg: #dbeafe;
+  --text-dark: #1e293b;
+  --text-medium: #475569;
+  --text-light: #94a3b8;
+  --bg-page: #f8fafc;
+  --bg-card: #ffffff;
+  --border: #e2e8f0;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+}
+
+/* Page Container */
+.assignments-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: calc(100vh - 48px);
+  background: var(--bg-page);
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+.page-header {
+  flex-shrink: 0;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  padding: 20px 24px;
+}
+
+.header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.header-info h1 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.subtitle {
+  margin: 6px 0 0;
+  color: var(--text-medium);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 10px;
+  background: var(--primary);
+  color: white;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+/* Bouton Ajouter */
+.btn-add {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 14px;
+  box-shadow: var(--shadow-md);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-add:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-add mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+/* =====================================================
+   MAIN CONTENT
+   ===================================================== */
+.main-wrapper {
+  flex: 1;
+  min-height: 0;
+  padding: 24px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Card du tableau */
+.table-card {
+  flex: 1;
+  min-height: 0;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Zone scrollable du tableau */
+.table-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+/* =====================================================
+   TABLEAU
+   ===================================================== */
+.assignments-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Headers */
+.assignments-table th {
+  background: linear-gradient(to bottom, #f8fafc, #f1f5f9) !important;
+  color: var(--text-medium) !important;
+  font-weight: 700 !important;
+  font-size: 11px !important;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 16px 20px !important;
+  border-bottom: 2px solid var(--border) !important;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Cellules */
+.assignments-table td {
+  padding: 16px 20px !important;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+/* Ligne hover */
+.assignment-row {
+  transition: background 0.15s ease;
+  cursor: pointer;
+}
+
+.assignment-row:hover {
+  background: #f8fafc !important;
+}
+
+.assignment-row:last-child td {
+  border-bottom: none;
+}
+
+/* Colonnes spécifiques */
+.col-numero {
+  width: 60px;
+  min-width: 60px;
+  max-width: 60px;
+  text-align: center !important;
+}
+
+.col-nom {
+  min-width: 280px;
+}
+
+.col-date {
+  width: 160px;
+  min-width: 160px;
+}
+
+.col-status {
+  width: 140px;
+  min-width: 140px;
+}
+
+/* Numéro de ligne */
+.row-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--bg-page);
+  color: var(--text-medium);
+  border-radius: 50%;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+/* Lien assignment */
+.assignment-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: var(--text-dark);
+  transition: color 0.15s ease;
+}
+
+.assignment-link:hover {
+  color: var(--primary);
+}
+
+.assignment-link:hover .assignment-icon {
+  transform: scale(1.05);
+}
+
+/* Icône assignment */
+.assignment-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.assignment-icon.done {
+  background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+}
+
+.assignment-icon mat-icon {
+  color: var(--primary);
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+}
+
+.assignment-icon.done mat-icon {
+  color: var(--success);
+}
+
+/* Nom */
+.assignment-name {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.4;
+  word-break: break-word;
+  white-space: normal;
+}
+
+/* Badge date */
+.date-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--bg-page);
+  border-radius: var(--radius-sm);
+  color: var(--text-medium);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.date-badge mat-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  color: var(--text-light);
+}
+
+/* Status chips */
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  min-width: 100px;
+  text-align: center;
+}
+
+.status-chip mat-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+.status-chip.done {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.status-chip.pending {
+  background: var(--pending-bg);
+  color: var(--pending);
+}
+
+/* =====================================================
+   PAGINATION
+   ===================================================== */
+.pagination-bar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: linear-gradient(to bottom, #fafbfc, #f1f5f9);
+  border-top: 1px solid var(--border);
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.pagination-info {
+  font-size: 14px;
+  color: var(--text-medium);
+  white-space: nowrap;
+}
+
+.pagination-info strong {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.custom-paginator {
+  background: transparent !important;
+}
+
+::ng-deep .custom-paginator .mat-mdc-paginator-container {
+  padding: 0 !important;
+  min-height: auto !important;
+}
+
+::ng-deep .custom-paginator .mat-mdc-paginator-page-size {
+  margin-right: 16px;
+}
+
+::ng-deep .custom-paginator .mat-mdc-paginator-range-label {
+  margin: 0 16px;
+  font-weight: 500;
+}
+
+/* =====================================================
+   EMPTY STATE
+   ===================================================== */
+.empty-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 24px;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.empty-illustration {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-illustration mat-icon {
+  font-size: 50px;
+  width: 50px;
+  height: 50px;
+  color: var(--primary);
+}
+
+.empty-state h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.empty-state p {
+  margin: 0 0 24px;
+  color: var(--text-medium);
+  font-size: 15px;
+}
+
+/* =====================================================
+   SCROLLBAR CUSTOM
+   ===================================================== */
+.table-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.table-scroll::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.table-scroll::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.table-scroll::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* =====================================================
+   RESPONSIVE - TABLETTE
+   ===================================================== */
+@media (max-width: 1024px) {
+  .main-wrapper {
+    padding: 16px;
+  }
+  
+  .table-card {
+    border-radius: var(--radius-md);
+  }
+  
+  .col-nom {
+    min-width: 220px;
+  }
+}
+
+/* =====================================================
+   RESPONSIVE - MOBILE
+   ===================================================== */
+@media (max-width: 768px) {
+  .assignments-page {
+    max-height: none;
+    height: auto;
+  }
+  
+  .page-header {
+    padding: 16px;
+  }
+  
+  .header-content {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .header-info h1 {
+    font-size: 22px;
+  }
+  
+  .btn-add {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 20px;
+  }
+  
+  .main-wrapper {
+    padding: 12px;
+    flex: none;
+    min-height: calc(100vh - 200px);
+  }
+  
+  .table-card {
+    flex: none;
+    max-height: calc(100vh - 280px);
+    overflow: hidden;
+  }
+  
+  .table-scroll {
+    overflow-x: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .assignments-table {
+    min-width: 580px;
+  }
+  
+  .assignments-table th {
+    padding: 12px 14px !important;
+    font-size: 10px !important;
+  }
+  
+  .assignments-table td {
+    padding: 12px 14px !important;
+  }
+  
+  .col-numero {
+    width: 45px;
+    min-width: 45px;
+    max-width: 45px;
+  }
+  
+  .row-number {
+    width: 26px;
+    height: 26px;
+    font-size: 11px;
+  }
+  
+  .col-nom {
+    min-width: 180px;
+  }
+  
+  .col-date {
+    width: 120px;
+    min-width: 120px;
+  }
+  
+  .col-status {
+    width: 110px;
+    min-width: 110px;
+  }
+  
+  .assignment-icon {
+    width: 34px;
+    height: 34px;
+  }
+  
+  .assignment-icon mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+  
+  .assignment-name {
+    font-size: 13px;
+  }
+  
+  .assignment-link {
+    gap: 10px;
+  }
+  
+  .date-badge {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+  
+  .date-badge mat-icon {
+    font-size: 14px;
+    width: 14px;
+    height: 14px;
+  }
+  
+  .status-chip {
+    padding: 6px 10px;
+    font-size: 11px;
+    min-width: 85px;
+  }
+  
+  .status-chip mat-icon {
+    font-size: 14px;
+    width: 14px;
+    height: 14px;
+  }
+  
+  .pagination-bar {
+    padding: 10px 12px;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .pagination-info {
+    font-size: 13px;
+  }
+  
+  ::ng-deep .custom-paginator .mat-mdc-paginator-page-size-label {
+    display: none;
+  }
+  
+  .empty-state {
+    padding: 40px 20px;
+  }
+  
+  .empty-illustration {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .empty-illustration mat-icon {
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .empty-state h2 {
+    font-size: 20px;
+  }
+}
+
+/* =====================================================
+   RESPONSIVE - PETIT MOBILE
+   ===================================================== */
+@media (max-width: 480px) {
+  .header-info h1 {
+    font-size: 20px;
+  }
+  
+  .count-badge {
+    min-width: 24px;
+    height: 24px;
+    font-size: 12px;
+  }
+  
+  .assignments-table {
+    min-width: 520px;
+  }
+  
+  .col-nom {
+    min-width: 160px;
+  }
+  
+  .assignment-icon {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .assignment-icon mat-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+  }
+  
+  .assignment-name {
+    font-size: 12px;
+  }
+}
