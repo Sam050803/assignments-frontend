@@ -1,0 +1,15 @@
+{
+  "name": "mini-server",
+  "version": "1.0.0",
+  "description": "Mini serveur web pour servir les fichiers statiques Angular",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "npm install && cd .. && npm install && npm run build"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "author": "",
+  "license": "ISC"
+}
